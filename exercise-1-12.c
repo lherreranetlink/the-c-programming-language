@@ -18,9 +18,7 @@ int main()
                 state = OUT;
             }
             else 
-            {
                 putchar(c);
-            }
         }
         else 
         {

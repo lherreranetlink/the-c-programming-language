@@ -38,7 +38,7 @@ int getlinecustom(char s[], int lim)
 
 void printline(char line[], int size)
 {
-    int i, c;
+    int i;
     for (i = 0; i < size; ++i)
         putchar(line[i]);
 }

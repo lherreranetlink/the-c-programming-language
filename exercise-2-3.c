@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_INPUT_SIZE 100
+#define MAX_INPUT_SIZE 6
 #define NULL_CHARACTER '\0'
 
 int htoi(char s[]);
@@ -9,24 +9,22 @@ int htoi(char s[]);
 int main()
 {
     char input[MAX_INPUT_SIZE + 1]; //An extra charcater for null character
-    int c, count = 0;
+    int c;
+    int stringSize = 0;
     int converted = 0;
+    int iterations = 0;
 
-    while (((c = getchar()) != EOF && c != '\n') || count >= MAX_INPUT_SIZE) 
+    while (((c = getchar()) != EOF && c != '\n') && stringSize < MAX_INPUT_SIZE) 
     {
-        if (!((c == '0' || c == 'x' || c == 'X') && count == 0))
+        if (!((c == '0' || c == 'x' || c == 'X') && stringSize == 0) || iterations >= 2)
         {
-            input[count] = c;
-            count++;
+            input[stringSize] = c;
+            stringSize++;
         }
+        iterations++;
     }
 
-    printf("Sali: %s\n", input);
-
-    if (count >= MAX_INPUT_SIZE)
-        printf("Warning, input size provided exceeds the maximum lenght permited, input will be turncated to %d\n", MAX_INPUT_SIZE);
-
-    input[count] = NULL_CHARACTER;
+    input[stringSize] = NULL_CHARACTER;
 
     converted = htoi(input);
 
@@ -35,23 +33,14 @@ int main()
     else
         printf("Error: Illegal hexadecimal digits: %s\n", input);
 
+    return 0;
+
 }
 
 int htoi(char s[])
 {
     int rt = 0;
     int start = 0;
-
-    if (strlen(s) > 2)
-    {
-        char first = s[0];
-        char second = s[1];
-
-        if (first == '0' && (second == 'x' || second == 'X'))
-        {
-            start = 2;
-        }
-    }
 
     int i;
     char c;

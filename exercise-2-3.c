@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_INPUT_SIZE 102 //100 Characteres and 2 extra considering 0x
+#define MAX_INPUT_SIZE 100
 #define NULL_CHARACTER '\0'
 
 int htoi(char s[]);
@@ -14,9 +14,14 @@ int main()
 
     while (((c = getchar()) != EOF && c != '\n') || count >= MAX_INPUT_SIZE) 
     {
-        input[count] = c;
-        count++;
+        if (!((c == '0' || c == 'x' || c == 'X') && count == 0))
+        {
+            input[count] = c;
+            count++;
+        }
     }
+
+    printf("Sali: %s\n", input);
 
     if (count >= MAX_INPUT_SIZE)
         printf("Warning, input size provided exceeds the maximum lenght permited, input will be turncated to %d\n", MAX_INPUT_SIZE);
@@ -26,7 +31,7 @@ int main()
     converted = htoi(input);
 
     if (converted >= 0)
-        printf("%d\n", htoi(input));
+        printf("Decimal value: %d\n", htoi(input));
     else
         printf("Error: Illegal hexadecimal digits: %s\n", input);
 

@@ -28,7 +28,7 @@ int main()
     if (converted >= 0)
         printf("%d\n", htoi(input));
     else
-        printf("Error: Illegal hexadecimal digits: %s\n", s);
+        printf("Error: Illegal hexadecimal digits: %s\n", input);
 
 }
 

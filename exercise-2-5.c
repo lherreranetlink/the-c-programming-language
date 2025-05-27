@@ -9,7 +9,7 @@ void findOcurrences(char s1[], char s2[]);
 int main()
 {
     char s1[MAX_STRING_SIZE] = "example";
-    char s2[MAX_STRING_SIZE] = "uiym,nb";
+    char s2[MAX_STRING_SIZE] = "3rhghgj";
 
     printf("String 1: %s\n", s1);
     printf("String 2: %s\n", s2);

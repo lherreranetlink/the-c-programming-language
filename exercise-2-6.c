@@ -3,6 +3,7 @@
 
 unsigned getbits(unsigned x, int p, int n);
 unsigned getrightmostbits(unsigned y, int n);
+unsigned setbits(unsigned x, int p, int n, int y);
 
 int main()
 {
@@ -12,34 +13,17 @@ int main()
     int n = 5;
     int p = 21;
 
-    int provisional1 = x >> (p + 1); 
+    result = setbits(x, p, n, y);
 
-    provisional1 = provisional1 << (p + 1);
-
-    int provisional2 = getrightmostbits(x, (p + 1 - n));
-
-    printf("provisional1: %u\n", provisional1);
-    printf("provisional1: %u\n", provisional2);
-
-    unsigned provisionalResult1 = provisional1 | provisional2;
-
-    printf("provisionalResult1: %u\n", provisionalResult1);
-
-    unsigned provisional3 = getrightmostbits(y, n);
-
-    printf("provisional3: %u\n", provisional3);
-
-    unsigned provisionalResult2 = provisional3 << (p + 1 - n);
-
-    printf("provisionalResult2: %u\n", provisionalResult2);
-
-    unsigned finalResult = provisionalResult1 | provisionalResult2;
-
-    printf("finalResult: %u\n", finalResult);
+    printf("X: %u\n", x);
+    printf("Y: %u\n", y);
+    printf("n: %d\n", n);
+    printf("p: %d\n", p);
+    printf("Result: %u\n", result);
 
 }
 
-//get n number of bits starting from position p from an unsigned x leaving the rest of the bits unchanged
+//get n number of bits starting from position p from an unsigned x and carries the found bits to the right
 unsigned getbits(unsigned x, int p, int n)
 {
     return ((x >> (p + 1 - n)) & ~(~0 << n));
@@ -50,3 +34,26 @@ unsigned getrightmostbits(unsigned y, int n)
 {
     return ~(~0 << n) & y;
 } 
+
+//Returns x with the n bits that begin at position p set to the rightmost n bits of y, leaving the other bits unchanged
+unsigned setbits(unsigned x, int p, int n, int y)
+{
+    unsigned provisional1 = 0;
+    unsigned provisional2 = 0;
+    unsigned provisional3 = 0;
+    unsigned provisionalResult1 = 0;
+    unsigned provisionalResult2 = 0;
+    unsigned finalResult = 0;
+
+    provisional1 = x >> (p + 1); 
+    provisional1 = provisional1 << (p + 1);
+    provisional2 = getrightmostbits(x, (p + 1 - n));
+    provisionalResult1 = provisional1 | provisional2;
+
+    provisional3 = getrightmostbits(y, n);
+    provisionalResult2 = provisional3 << (p + 1 - n);
+
+    finalResult = provisionalResult1 | provisionalResult2;
+
+    return finalResult;
+}

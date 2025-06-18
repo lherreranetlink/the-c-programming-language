@@ -21,6 +21,8 @@ int main()
     printf("p: %d\n", p);
     printf("Result: %u\n", result);
 
+    return 0;
+
 }
 
 //get n number of bits starting from position p from an unsigned x and carries the found bits to the right
